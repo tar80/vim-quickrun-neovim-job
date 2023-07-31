@@ -1,19 +1,15 @@
-let s:is_windows = has('win32')
-
 function! s:runner_validate() abort
   if !has('nvim')
     throw 'This runner requires Neovim. Use job runner in Vim instead.'
   endif
-  if !s:is_windows && !executable('sh')
-    throw 'This runner requires sh in Linux/macOS'
+  if !executable('nyagos')
+    throw 'This runner requires Nyagos in Windows'
   endif
 endfunction
 
 function! s:runner_run(commands, input, session) abort dict
   let command = join(a:commands, ' && ')
-  let cmd_arg = s:is_windows
-        \ ? printf('cmd.exe /c (%s)', command)
-        \ : ['sh', '-c', command]
+  let cmd_arg = printf('nyagos.exe -c %s', command)
   let options = {
         \ 'session': a:session.continue(),
         \ 'on_stdout': funcref('s:on_stdout'),

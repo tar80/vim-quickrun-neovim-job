@@ -1,4 +1,4 @@
-# vim-quickrun-neovim-job
+# vim-quickrun-neovim-job for nyagos on windows
 
 Non official job runner of [vim-quickrun][] for Neovim.
 
